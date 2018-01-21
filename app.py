@@ -41,10 +41,11 @@ def sign_in():
 @app.route('/email/<string:username>')
 def emailreceive(username):
         receiver = db.Tasks.find_one({'taskauthor': username})
-        receiver.accepted = True
+        receiver['accepted'] = True
         db.Tasks.update_one({'taskauthor':username}, {'$set': receiver}, upsert = False)
         ## receiver = 'keshvanidillon@gmail.com'3
         server = smtplib.SMTP('smtp.gmail.com', 587)
+        print(receiver['email'])
 
         server.starttls()
 
