@@ -38,22 +38,26 @@ def sign_in():
             return render_template('sign_in.html', form=sign_in_form)
     return render_template('sign_in.html', form=sign_in_form)
 #3#
-@app.route('/email/<string:username>')
+@app.route('/email/<string:username>', methods=['GET', 'POST'] )
 def emailreceive(username):
-        receiver = db.Tasks.find_one({'taskauthor': username})
-        receiver['accepted'] = True
-        db.Tasks.update_one({'taskauthor':username}, {'$set': receiver}, upsert = False)
-        ## receiver = 'keshvanidillon@gmail.com'3
-        server = smtplib.SMTP('smtp.gmail.com', 587)
-        print(receiver['email'])
+    receiver = db.Tasks.find_one({'taskauthor': username})
+    print(receiver['email'])
+    if request.method == "POST":
+        #receiver['accepted'] = True
+        #db.Tasks.update_one({'taskauthor':username}, {'$set': receiver}, upsert = False)
+        ## receiver = 'keshvanidillon@gmail.com'3##
 
+
+        rec = request.form['email']
+        print(request.form['email'])
+        server = smtplib.SMTP('smtp.gmail.com', 587)
         server.starttls()
 
         server.login('temppythontest@gmail.com', 'pythonisdope')
-        print(session['email'])
-        server.sendmail('temppythontest@gmail.com', receiver['email'], 'Someone is willing to help you! Please contact them at: {0}'.format(session['email']))
+        #print(session['email'])
+        server.sendmail('temppythontest@gmail.com', rec, 'Someone needs your help!')
         {}
-        return render_template('getemailform.html')
+    return render_template('getemailform.html', email=receiver['email'])
 
 @app.route('/payment/', methods = ['GET','POST'])
 def payment():
@@ -131,7 +135,7 @@ def newrequest():
 
 
 
-
+#####
 
 if __name__ == '__main__':
    app.run(debug=app.config['DEBUG'])

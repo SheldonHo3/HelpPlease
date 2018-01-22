@@ -115,17 +115,7 @@
                                 </button>
                             </h5>
                         </div>
-                
-                        <div id="collapse{{loop.index}}" class="collapse show" aria-labelledby="heading{{loop.index}}" data-parent="#accordion">
-                            <div class="card-body">
-                                {{ request.description }}
-                                <!-- Button trigger modal -->
-                                <button type="button" style = "float:right;" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" {% if not username %}disabled{%endif%}>
-                                    Accept
-                                </button>
-                                
-                                <!-- Modal -->
-                                <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                 <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                     <div class="modal-dialog" role="document">
                                         <div class="modal-content">
                                             <div class="modal-header">
@@ -136,7 +126,7 @@
                                             </div>
                                             <div class="modal-body">
                                                 Are you sure you want to accept? An email will be sent on your behalf to the postee expressing your interest
-                                              <p>{{ request.taskauthor }}</p>
+
                                             </div>
                                             <div class="modal-footer">
                                                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -145,6 +135,17 @@
                                         </div>
                                     </div>
                                 </div>
+                        <div id="collapse{{loop.index}}" class="collapse show" aria-labelledby="heading{{loop.index}}" data-parent="#accordion">
+                            <div class="card-body">
+                                {{ request.description }}
+                              <p>{{ request.email }}</p>
+                                <!-- Button trigger modal -->
+                                <button type="button" style = "float:right;" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" {% if not username %}disabled{%endif%}>
+                                    Accept
+                                </button>
+                                
+                                <!-- Modal -->
+
                             </div>
                         </div>
                     </div>

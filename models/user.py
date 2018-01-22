@@ -1,3 +1,5 @@
+from random import random
+
 class User():
     def __init__(self, email, username, password):
         self.email = email
@@ -20,6 +22,7 @@ class Task():
         self.email = email
         self.accepted = accepted
         self.acceptor = acceptor
+        self.id = random()
 
 
     def json(self):
@@ -29,5 +32,6 @@ class Task():
             'description':self.description,
             'email': self.email,
             'accepted':self.accepted,
-            'acceptor':self.acceptor
+            'acceptor':self.acceptor,
+            '_id': self.id
         }
